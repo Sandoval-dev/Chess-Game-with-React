@@ -1,0 +1,17 @@
+.square{
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    
+}
+
+.false{
+    background-color: wheat;
+}
+
+.true{
+    background-color: green;
+}
