@@ -3,12 +3,13 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
 import Board from './Board';
 import  { useEffect, useState } from 'react';
-import subjectGame from './Game'
+import subjectGame, { initGame } from './Game'
 
 function App() {
 
   const[board,setBoard]=useState([]);
   useEffect(()=>{
+    initGame()
     const subscribe=subjectGame.subscribe(sub => setBoard(sub.chess))
 
     return () => subscribe.unsubscribe();
