@@ -21,5 +21,34 @@ export const move = (from,to) => {
 }
 
 const updateGame = () => {
-    subjectGame.next({chess:chess.board()});
+    const isGameOver = chess.isGameOver();
+    subjectGame.next({chess:chess.board(), isGameOver, result: isGameOver ? getGameResult(): null});
+}
+
+const getGameResult = () => {
+
+    if (chess.isCheckmate()) {
+
+        const winner = chess.turn() ==='w' ? 'Black' : 'White';
+        return `ŞAH MAT - KAZANAN :${winner}`
+        
+    }else if(chess.isDraw()){
+        let reason = "50 Hamle Kuralı"
+        if (chess.isStalemate()) {
+            reason = 'Çıkmaz Döngü'
+            
+        }
+        else if(chess.isThreefoldRepetition()){
+            reason = 'Tekrarlama'
+        }
+        else if(chess.isInsufficientMaterial()){
+            reason = 'Yetersiz Malzeme'
+        }
+
+        return reason
+
+    }
+    else{
+        return 'Bilinmeyen Durum'
+    }
 }
